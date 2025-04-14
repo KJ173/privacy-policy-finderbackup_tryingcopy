@@ -169,7 +169,7 @@ def format_output(analysis: Dict) -> Dict:
 app = Flask(__name__)
 CORS(app)
 
-API_KEY = os.environ.get('PRIVACY_API_KEY', 'your-default-api-key')  # Set via Heroku config vars
+API_KEY = os.environ.get('PRIVACY_API_KEY', 'your-default-api-key')  # Set via Render environment variables
 
 @app.route('/analyze', methods=['POST'])
 def analyze_policy_endpoint():
@@ -186,4 +186,5 @@ def analyze_policy_endpoint():
     return jsonify(report)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get("PORT", 5000))  # Render provides PORT, default to 5000 for local testing
+    app.run(host='0.0.0.0', port=port)
