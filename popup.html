@@ -1,15 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" charset="UTF-8">
 <head>
-  <title>Ai Privacy Policy Analyzer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Scout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Ai Privacy Policy Analyzer</h1>
-  <p id="status">Searching...</p>
-  <p id="result"></p>
-  <button id="toggleContent" style="display: none;">Show Full Policy</button>
-  <div id="policyContent" class="policy-content"></div>
+  <h1>Privacy Scout: Your Trust Guardian</h1>
+  <div class="navbar-container">
+    <div class="navbar">
+      <button class="tab-button active" data-tab="overview">Overview</button>
+      <button class="tab-button" data-tab="redFlags">Red Flags</button>
+      <button class="tab-button" data-tab="userTips">User Tips</button>
+      <button class="tab-button" data-tab="detailedAnalysis">Detailed Analysis</button>
+    </div>
+  </div>
+
+  <div id="overview-tab" class="tab-content">
+    <p id="status">Searching...</p>
+    <div id="policyUrlBox" class="policy-url-box"></div>
+    <div id="overview-content" class="overview-container">
+      <div id="overview-top">
+        <div id="safetyCircle" class="risk-circle">20% Safe</div>
+        <div class="data-overview" id="dataOverview">
+          <h4>Data Overview</h4>
+          <p><span class="icon">📋</span> <strong>Collected:</strong> None</p>
+          <p><span class="icon">🔧</span> <strong>Used For:</strong> None</p>
+        </div>
+      </div>
+      <div class="risk-info" id="riskInfo">Risk Level: High Risk</div>
+    </div>
+  </div>
+
+  <div id="redFlags-tab" class="tab-content">
+    <div class="red-flags" id="redFlagsList">
+      <h4>Red Flags</h4>
+      <p>No significant red flags detected.</p>
+    </div>
+  </div>
+
+  <div id="userTips-tab" class="tab-content">
+    <div class="user-tips" id="userTipsList">
+      <h4>User Tips</h4>
+      <p>No specific tips at this time.</p>
+    </div>
+  </div>
+
+  <div id="detailedAnalysis-tab" class="tab-content">
+    <div class="detailed-analysis" id="detailedAnalysisContent">
+      <h4>Detailed Analysis</h4>
+      <div id="detailedSummary"></div>
+    </div>
+  </div>
+
   <script src="popup.js"></script>
+  <script src="cloudflare.js"></script>
 </body>
 </html>

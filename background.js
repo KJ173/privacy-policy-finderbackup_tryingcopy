@@ -9,10 +9,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     fetch(message.url)
       .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.text(); // Fetch text (assumed UTF-8 by default)
       })
       .then(htmlText => {
         console.log("[background.js] Raw HTML fetched, length:", htmlText.length);
@@ -21,10 +19,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           sendResponse({ status: 'error', error: 'No HTML content received' });
           return;
         }
+        // Enhanced UTF-8 decoding with fallback
+        const decodedText = new TextDecoder('utf-8', { fatal: false }).decode(new TextEncoder().encode(htmlText));
+        // Sanitize HTML to remove potential encoding artifacts
+        const sanitizedText = decodedText.replace(/[^\x20-\x7E]/g, ' ').replace(/\s+/g, ' ').trim();
         fetch(API_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ policy_text: htmlText, api_key: PRIVACY_API_KEY })
+          body: JSON.stringify({ policy_text: sanitizedText, api_key: PRIVACY_API_KEY })
         })
         .then(response => {
           if (!response.ok) {

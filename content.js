@@ -137,15 +137,12 @@ const smartFindPrivacyPolicyNearForm = () => {
 const findPrivacyPolicyUrl = () => {
   console.log("[content.js] Starting full privacy policy URL detection...");
 
-  // Step 1: Look for obvious privacy link
   const directLink = tryFindAnyPrivacyLink();
   if (directLink) return directLink;
 
-  // Step 2: Try form-proximity detection
   const formLink = smartFindPrivacyPolicyNearForm();
   if (formLink) return formLink;
 
-  // Step 3: Fallback to pattern matching
   return fallbackFindPrivacyPolicyUrl();
 };
 
