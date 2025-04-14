@@ -1,7 +1,7 @@
 console.log("[background.js] Background script loaded.");
 
-const API_KEY = 'your-secure-api-key'; // Replace with the key set in Heroku
-const API_ENDPOINT = 'https://your-app-name.herokuapp.com/analyze'; // Replace with your Heroku URL
+const PRIVACY_API_KEY = '7c9c03c2063d9e7eda61a2ecf452cd3e'; // Match the Render environment variable
+const API_ENDPOINT = 'https://privacyscout.onrender.com'; // Replace with your Render URL
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'fetchPrivacyPolicyContent') {
@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         fetch(API_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ policy_text: htmlText, api_key: API_KEY })
+          body: JSON.stringify({ policy_text: htmlText, PRIVACY_API_KEY: PRIVACY_API_KEY })
         })
         .then(response => {
           if (!response.ok) {
