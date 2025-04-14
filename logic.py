@@ -6,7 +6,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -14,12 +13,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Ensure NLTK punkt_tab is downloaded
+# Add local NLTK data path
+nltk.data.path.append('./nltk_data')  # Matches the folder structure in your screenshot
+
+# Verify punkt resource availability
 try:
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    logger.info("Downloading NLTK punkt_tab resource...")
-    nltk.download('punkt_tab')
+    nltk.data.find('tokenizers/punkt')
+    logger.info("NLTK punkt resource found at: %s", nltk.data.find('tokenizers/punkt'))
+except LookupError as e:
+    logger.error("NLTK punkt resource not found: %s. Deployment will fail.", e)
+    raise  # Raise the exception to halt the app if punkt is missing
 
 # Step 1: Define Constants
 CATEGORIES = {

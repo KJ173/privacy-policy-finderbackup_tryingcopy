@@ -17,7 +17,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    files: ["content.97bb45a0.js"]
+    files: ["content.js"]
   }, () => {
     if (chrome.runtime.lastError) {
       console.error("[popup.js] Script injection error:", chrome.runtime.lastError.message);

@@ -1,13 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Ai Privacy Policy Analyzer",
+  "name": "Privacy Policy Analyzer",
   "version": "0.0.1",
   "description": "This extension will help you to analyze the privacy policy of any website.",
   "icons": {
-    "16": "icon-16.0b1dc57e.png",
-    "32": "icon-32.4ee6e39d.png",
-    "64": "icon-64.4ee6e39d.png",
-    "128": "icon-128.b9f2c272.png"
+    "16": "icon.png"
   },
   "content_security_policy": {
     "extension_pages": "default-src 'self' data:; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; connect-src *"
